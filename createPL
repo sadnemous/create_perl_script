@@ -1,0 +1,29 @@
+#!/usr/bin/ksh
+ff=$1
+
+if [ -z "$ff" ]; then
+  echo "Please provide a file name"
+  exit 0
+fi
+
+echo "#!$(which perl)">$ff
+echo 'my $inFile=$ARGV[0];'>>$ff
+echo 'my $outFile="out_$inFile";'>>$ff
+echo ''>>$ff
+echo ''>>$ff
+echo 'open(IN_FH, "<", $inFile) or die "Could not open the input file. $! \n";'>>$ff
+echo 'open(OUT_FH, ">", $outFile) or die "Could not open the input file. $! \n";'>>$ff
+echo ''>>$ff
+echo ''>>$ff
+echo 'my $inputLine="";'>>$ff
+echo 'my $outputLine="";'>>$ff
+echo 'while(<IN_FH>) '>>$ff
+echo '{'>>$ff
+echo '  chomp($inputLine=$_); '>>$ff
+echo '  $outputLine=$inputLine;'>>$ff
+echo '  $outputLine =~ s/pattern_to_match/pattern_to_replace/g;'>>$ff
+echo '  print OUT_FH $outputLine . "\n";'>>$ff
+echo '}'>>$ff
+echo 'close(IN_FH);'>>$ff
+echo 'close(OUT_FH);'>>$ff
+chmod 755 $ff

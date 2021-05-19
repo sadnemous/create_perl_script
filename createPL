@@ -11,6 +11,7 @@ echo 'my $inFile=$ARGV[0];'>>$ff
 echo 'my $outFile="out_$inFile";'>>$ff
 echo ''>>$ff
 echo ''>>$ff
+echo 'my $delim="|"'>>$ff
 echo 'open(IN_FH, "<", $inFile) or die "Could not open the input file. $! \n";'>>$ff
 echo 'open(OUT_FH, ">", $outFile) or die "Could not open the input file. $! \n";'>>$ff
 echo ''>>$ff
